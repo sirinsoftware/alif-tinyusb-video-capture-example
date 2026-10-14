@@ -1,0 +1,132 @@
+THIRD PARTY NOTICES
+===================
+
+This repository is a mixed-licence publication. It combines material from
+several upstream projects with modifications developed for the Alif
+Semiconductor platform, published by Sirin Software as a collaboration
+snapshot. No single licence applies to the whole repository.
+
+This file lists the significant third-party components, where they come
+from, and where their licence terms can be found. It does not replace the
+notices contained in the individual files; those notices remain
+authoritative.
+
+
+1. TinyUSB (Git submodule: lib/tinyusb)
+---------------------------------------
+Used as:      the USB stack, the USB video class driver, the Alif Ensemble
+              device controller driver and the board support package for the
+              Alif E7 DevKit.
+Submodule:    https://github.com/sirinsoftware/tinyusb (branch: alif)
+Lineage:      that repository is a fork whose content derives from upstream
+              TinyUSB, https://github.com/hathach/tinyusb. GitHub records its
+              fork parent as https://github.com/AlifSemi-Sirin/tinyusb_dev.
+Licence:      MIT, see lib/tinyusb/LICENSE; the MIT licence text is also
+              provided here as LICENSE-MIT.txt.
+Note:         the submodule additionally contains Alif Semiconductor material
+              that is not MIT licensed, in particular
+              src/portable/alif/alif_e7_dk/ and hw/bsp/alif/. Those files
+              carry Alif Semiconductor copyright notices and are covered by
+              the Alif Semiconductor Software License Agreement
+              (LICENSE-ALIF.txt).
+
+
+2. TinyUSB sources vendored into the examples
+---------------------------------------------
+Each example directory carries its own copy of the TinyUSB video_capture
+example sources:
+
+  video_capture/src/, video_capture_freertos/src/, video_capture_zephyr/src/
+    usb_descriptors.h    unmodified TinyUSB source
+    images.h             unmodified TinyUSB source
+    main.c               TinyUSB example source, modified in this project
+    usb_descriptors.c    TinyUSB example source, modified in this project
+    tusb_config.h        TinyUSB example source, modified in this project
+
+Licence:      MIT, see LICENSE-MIT.txt.
+Copyright:    the copyright notices in these files name Ha Thach
+              (tinyusb.org) and Jerzy Kasenbreg. Those notices are retained
+              unchanged.
+Modifications: developed for the Alif Semiconductor platform; see the
+              per-file notices and README.md.
+
+The same applies to video_capture_zephyr/CMakeLists.txt, which derives from
+the TinyUSB example CMakeLists.txt of the same name.
+
+
+3. Alif Common Application Utilities (Git submodule: lib/alif_common-app-utils)
+-------------------------------------------------------------------------------
+Used as:      UART trace/logging support (logging/uart_tracelib.c) for the
+              bare-metal and FreeRTOS examples.
+Source:       https://github.com/alifsemi/alif_common-app-utils
+Licence:      Alif Semiconductor Software License Agreement, see
+              lib/alif_common-app-utils/License.txt (also provided here as
+              LICENSE-ALIF.txt).
+
+
+4. Alif Semiconductor source in this repository
+------------------------------------------------
+video_capture_freertos/dcd_ensemble_isoc_buffers.h carries an Alif
+Semiconductor copyright notice and is covered by the Alif Semiconductor
+Software License Agreement (LICENSE-ALIF.txt).
+
+
+5. CMSIS-Pack content under video_capture*/RTE/
+------------------------------------------------
+The RTE directories hold configuration files copied out of CMSIS software
+packs by the CMSIS solution build tooling. They are pack content, not
+original work of this project, and (with the exception noted below) are
+byte-identical to the pack baselines stored alongside them as
+"<name>.base@<version>" files.
+
+  AlifSemiconductor::Ensemble 2.0.2
+      https://github.com/alifsemi/alif_ensemble-cmsis-dfp
+      RTE/Device/... and RTE/BSP/... files carrying Alif Semiconductor
+      copyright notices. Licence: Alif Semiconductor Software License
+      Agreement, see LICENSE-ALIF.txt.
+
+  ARM::CMSIS 6.2.0
+      https://github.com/ARM-software/CMSIS_6
+      Licence: Apache-2.0.
+      video_capture/RTE/Device/AE722F80F55D5LS_M55_HP/gcc_linker_script.ld.src
+      carries an Arm Limited copyright notice and an Apache-2.0
+      SPDX identifier; the licence text is available at
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  ARM::CMSIS-FreeRTOS 11.2.0
+      https://github.com/ARM-software/CMSIS-FreeRTOS
+      video_capture_freertos/RTE/RTOS/FreeRTOSConfig.h is a FreeRTOS kernel
+      configuration file. Its header identifies FreeRTOS Kernel V10.4.0,
+      Copyright (C) 2019 Amazon.com, Inc. or its affiliates, under the MIT
+      licence. It differs from the pack baseline stored next to it
+      (FreeRTOSConfig.h.base@11.2.0) because it has been configured for this
+      project. See https://www.freertos.org
+
+The RTE/_<build>_<target>/RTE_Components.h files are generated by the CMSIS
+solution tooling and are marked "DO NOT EDIT".
+
+
+6. Alif Semiconductor VS Code template scaffolding
+--------------------------------------------------
+The CMSIS solution scaffolding and the editor/debug/flashing configuration
+follow the Alif Semiconductor VS Code template:
+
+    https://github.com/alifsemi/alif_vscode-template
+
+Files: alif.csolution.yml, cdefault.yml, alif.cbuild-pack.yml,
+vcpkg-configuration.json, video_capture*/*.cproject.yml, .vscode/ and .alif/.
+
+Licence:      Alif Semiconductor Software License Agreement. LICENSE-ALIF.txt
+              in this repository is a verbatim copy of the License.txt
+              distributed with that template.
+
+
+7. Zephyr RTOS (not contained in this repository)
+-------------------------------------------------
+The Zephyr example is built against the Alif Zephyr tree that west fetches at
+build time according to video_capture_zephyr/west.yml:
+
+    https://github.com/alifsemi/zephyr_alif, branch v2.1-zas-branch
+
+Zephyr is licensed under Apache-2.0; see
+https://github.com/zephyrproject-rtos/zephyr

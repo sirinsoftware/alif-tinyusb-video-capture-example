@@ -1,0 +1,22 @@
+# Developed for the Alif Semiconductor platform. Published by Sirin Software
+# as a collaboration snapshot.
+#
+# This repository combines material under several licences; see README.md,
+# LICENSE-MIT.txt, LICENSE-ALIF.txt and THIRD_PARTY_NOTICES.txt.
+
+manifest:
+  
+  defaults:
+    remote: alif
+
+  remotes:
+    - name: alif
+      url-base: https://github.com/alifsemi
+  
+  projects:
+    - name: zephyr
+      repo-path: zephyr_alif.git
+      revision: v2.1-zas-branch
+      import: true
+  self:
+    path: .
